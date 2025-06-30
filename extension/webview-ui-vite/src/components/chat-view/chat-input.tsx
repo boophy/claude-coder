@@ -2,6 +2,7 @@ import { vscode } from "@/utils/vscode"
 import React, { memo, useCallback, useRef, useEffect, KeyboardEvent } from "react"
 import InputArea from "./input-area"
 import { ChatState } from "./chat"
+import { useTranslation } from "@/hooks/useTranslation"
 
 interface ChatInputProps {
 	state: ChatState
@@ -24,6 +25,7 @@ export const ChatInput = memo(function ChatInput({
 	isInTask,
 	isHidden,
 }: ChatInputProps) {
+	const { t } = useTranslation()
 	const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
 	const handleKeyDown = useCallback(
@@ -53,7 +55,7 @@ export const ChatInput = memo(function ChatInput({
 			setInputValue={(value) => updateState({ inputValue: value })}
 			textAreaDisabled={state.textAreaDisabled}
 			handleSendMessage={onSendMessage}
-			placeholderText={isInTask ? "Type a message..." : "Type your task here..."}
+			placeholderText={isInTask ? t("chat.inputPlaceholder") : t("chat.taskPlaceholder")}
 			selectedImages={state.selectedImages}
 			setSelectedImages={(images) => updateState({ selectedImages: images })}
 			shouldDisableImages={shouldDisableImages}

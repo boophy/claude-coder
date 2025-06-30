@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { useTranslation } from '@/hooks/useTranslation'
 import { ChevronDown, ChevronUp, Link } from 'lucide-react'
 import { useState } from 'react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
@@ -38,6 +39,7 @@ export default function AttachmentsList({
 	files?: FileItem[]
 	urls?: UrlItem[]
 }) {
+	const { t } = useTranslation()
 	const [isExpanded, setIsExpanded] = useState(false)
 	const items = [...(files ?? []), ...(urls ?? [])]
 
@@ -95,7 +97,7 @@ export default function AttachmentsList({
 						{isExpanded ? (
 							<>
 								<ChevronUp className="w-3 h-3 mr-1" />
-								<span>Less</span>
+								<span>{t("files.less")}</span>
 							</>
 						) : (
 							<>

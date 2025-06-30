@@ -3,6 +3,7 @@ import { File } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { useTranslation } from '@/hooks/useTranslation'
 
 export interface FileInfo {
   path: string
@@ -14,19 +15,20 @@ interface FileBadgesProps {
 }
 
 export function FileBadges({ files = [] }: FileBadgesProps) {
+  const { t } = useTranslation()
   const [selectedFile, setSelectedFile] = useState<FileInfo | null>(null)
 
   if (!files || files.length === 0) {
     return (
       <div className="p-4 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-lg shadow-md max-w-md mx-auto">
-        <p className="text-gray-600">No files attached.</p>
+        <p className="text-gray-600">{t("files.noFilesAttached")}</p>
       </div>
     )
   }
 
   return (
     <div className="p-4 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-lg font-semibold text-gray-800 mb-2">Attached Files</h2>
+      <h2 className="text-lg font-semibold text-gray-800 mb-2">{t("files.attachedFiles")}</h2>
       <div className="flex flex-wrap gap-2">
         {files.map((file, index) => (
           <Dialog key={index}>
@@ -54,7 +56,7 @@ export function FileBadges({ files = [] }: FileBadgesProps) {
         ))}
       </div>
       <p className="mt-2 text-sm text-gray-600">
-        Total files: {files.length}
+        {t("files.totalFiles", { count: files.length })}
       </p>
     </div>
   )

@@ -21,6 +21,8 @@ import {
 } from "../ui/dialog"
 import { ArchiveRestore } from "lucide-react"
 import { rpcClient } from "@/lib/rpc-client"
+import { useTranslation } from "@/hooks/useTranslation"
+
 type SortOption = "newest" | "oldest" | "mostExpensive" | "mostTokens" | "mostRelevant"
 
 type HistoryViewProps = {
@@ -80,6 +82,7 @@ const highlight = (
 }
 
 const HistoryView = ({ onDone }: HistoryViewProps) => {
+	const { t } = useTranslation()
 	// Create a typed client *only using the type* AppRouter
 	const { taskHistory } = useExtensionState()
 	const [searchQuery, setSearchQuery] = useState("")
@@ -199,7 +202,7 @@ const HistoryView = ({ onDone }: HistoryViewProps) => {
 	return (
 		<div className="fixed inset-0 flex flex-col overflow-hidden">
 			<div className="flex justify-between items-center p-4 pb-0">
-				<h3 className="text-lg font-semibold">History</h3>
+				<h3 className="text-lg font-semibold">{t("history.title")}</h3>
 				<div className="flex flex-wrap gap-2">
 					<Button
 						onClick={async () => {
@@ -213,30 +216,30 @@ const HistoryView = ({ onDone }: HistoryViewProps) => {
 					<Dialog>
 						<DialogTrigger asChild>
 							<Button size="sm" variant="destructive">
-								Clear History
+								{t("history.clearHistory")}
 							</Button>
 						</DialogTrigger>
 						<DialogContent>
-							<DialogHeader className="pt-2">Are you sure you want to clear your history?</DialogHeader>
+							<DialogHeader className="pt-2">{t("history.clearHistoryDialog.title")}</DialogHeader>
 							<DialogDescription>
-								This action cannot be undone. All history will be permanently deleted
+								{t("history.clearHistoryDialog.description")}
 							</DialogDescription>
 							<DialogFooter className="gap-2">
 								<DialogClose asChild>
-									<Button variant="outline">Cancel</Button>
+									<Button variant="outline">{t("history.clearHistoryDialog.cancel")}</Button>
 								</DialogClose>
 								<DialogClose asChild>
 									<Button
 										variant="destructive"
 										onClick={() => vscode.postMessage({ type: "clearHistory" })}>
-										Delete All
+										{t("history.clearHistoryDialog.deleteAll")}
 									</Button>
 								</DialogClose>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
 					<Button size="sm" onClick={onDone}>
-						Done
+						{t("history.done")}
 					</Button>
 				</div>
 			</div>
@@ -244,7 +247,7 @@ const HistoryView = ({ onDone }: HistoryViewProps) => {
 				<div className="flex flex-col gap-4">
 					<Input
 						className="w-full"
-						placeholder="Name or task content"
+						placeholder={t("history.searchPlaceholder")}
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
 					/>
@@ -254,32 +257,32 @@ const HistoryView = ({ onDone }: HistoryViewProps) => {
 						onValueChange={(value) => setSortOption(value as SortOption)}>
 						<div className="flex items-center space-x-2">
 							<RadioGroupItem value="newest" id="newest" />
-							<Label htmlFor="newest">Newest</Label>
+							<Label htmlFor="newest">{t("history.sort.newest")}</Label>
 						</div>
 						<div className="flex items-center space-x-2">
 							<RadioGroupItem value="oldest" id="oldest" />
-							<Label htmlFor="oldest">Oldest</Label>
+							<Label htmlFor="oldest">{t("history.sort.oldest")}</Label>
 						</div>
 						<div className="flex items-center space-x-2">
 							<RadioGroupItem value="mostExpensive" id="mostExpensive" />
-							<Label htmlFor="mostExpensive">Most Expensive</Label>
+							<Label htmlFor="mostExpensive">{t("history.sort.mostExpensive")}</Label>
 						</div>
 						<div className="flex items-center space-x-2">
 							<RadioGroupItem value="mostTokens" id="mostTokens" />
-							<Label htmlFor="mostTokens">Most Tokens</Label>
+							<Label htmlFor="mostTokens">{t("history.sort.mostTokens")}</Label>
 						</div>
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value="mostRelevant" id="mostRelevant" disabled={!searchQuery} />
 									<Label htmlFor="mostRelevant" className={!searchQuery ? "opacity-50" : ""}>
-										Most Relevant
+										{t("history.sort.mostRelevant")}
 									</Label>
 								</div>
 							</TooltipTrigger>
 							<TooltipContent align="center" collisionPadding={8} side="bottom">
 								<span className="text-wrap block max-w-[75vw]">
-									Sort by relevance when searching (requires a search query)
+									{t("history.sort.mostRelevantTooltip")}
 								</span>
 							</TooltipContent>
 						</Tooltip>

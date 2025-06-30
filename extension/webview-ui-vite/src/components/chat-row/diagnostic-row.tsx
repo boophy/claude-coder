@@ -1,6 +1,7 @@
 import React from "react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 import { cn } from "../../lib/utils"
+import { useTranslation } from "@/hooks/useTranslation"
 
 interface DiagnosticRowProps {
 	state: "loading" | "loaded"
@@ -11,6 +12,7 @@ interface DiagnosticRowProps {
 }
 
 export const DiagnosticRow: React.FC<DiagnosticRowProps> = ({ state, diagnostics }) => {
+	const { t } = useTranslation()
 	const hasErrors = diagnostics?.some((d) => d.errorString)
 
 	return (
@@ -38,7 +40,7 @@ export const DiagnosticRow: React.FC<DiagnosticRowProps> = ({ state, diagnostics
 							/>
 							<span className="relative flex items-center space-x-1">
 								<span>
-									{state === "loading" ? "Loading Diagnostics" : "Diagnostics Loaded"}
+									{state === "loading" ? t("diagnostics.loading") : t("diagnostics.loaded")}
 									{state === "loading" && <span className="absolute inset-0 animate-pulse" />}
 								</span>
 								{state === "loaded" && diagnostics && (
@@ -57,7 +59,7 @@ export const DiagnosticRow: React.FC<DiagnosticRowProps> = ({ state, diagnostics
 					{state === "loaded" && diagnostics && (
 						<div className="space-y-3">
 							<h4 className="font-medium text-sm flex items-center space-x-2">
-								<span>Diagnostic Results</span>
+								<span>{t("diagnostics.results")}</span>
 								<span className="text-xs opacity-60">({diagnostics.length})</span>
 							</h4>
 							<div className="space-y-3">
@@ -69,7 +71,7 @@ export const DiagnosticRow: React.FC<DiagnosticRowProps> = ({ state, diagnostics
 												{diagnostic.errorString}
 											</pre>
 										) : (
-											<div className="text-xs text-success">No issues found</div>
+											<div className="text-xs text-success">{t("diagnostics.noIssues")}</div>
 										)}
 									</div>
 								))}
@@ -78,7 +80,7 @@ export const DiagnosticRow: React.FC<DiagnosticRowProps> = ({ state, diagnostics
 					)}
 					{state === "loading" && (
 						<div className="text-sm text-muted-foreground animate-pulse">
-							Analyzing files for diagnostics...
+							{t("diagnostics.analyzing")}
 						</div>
 					)}
 				</HoverCardContent>

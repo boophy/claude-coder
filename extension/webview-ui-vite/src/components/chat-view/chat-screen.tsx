@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Monitor, LayoutDashboard, Smartphone, Briefcase, RefreshCcw, Lightbulb } from "lucide-react"
 import { BorderBeam } from "../ui/border-beam"
+import { useTranslation } from "@/hooks/useTranslation"
 
 type ProjectType = "landingPage" | "dashboard" | "mobileApp" | "customProject"
 
@@ -46,6 +47,7 @@ const taskPrompts = {
 }
 
 export function ProjectDialog({ isOpen, onClose, projectType, onPreFill, sendMessage }: ProjectDialogProps) {
+	const { t } = useTranslation()
 	const [input, setInput] = useState("")
 	const [placeholder, setPlaceholder] = useState("")
 	const [isTyping, setIsTyping] = useState(true)
@@ -132,7 +134,7 @@ export function ProjectDialog({ isOpen, onClose, projectType, onPreFill, sendMes
 							<DialogHeader>
 								<DialogTitle className="text-2xl font-bold flex items-center gap-2">
 									<span className={`p-2 rounded-full text-primary`}>{getIcon(projectType)}</span>
-									What's on your mind ?
+									{t("chatScreen.projectDialog.title")}
 								</DialogTitle>
 							</DialogHeader>
 							<form onSubmit={handleSubmit} className="mt-4 space-y-4 w-full">
@@ -142,7 +144,7 @@ export function ProjectDialog({ isOpen, onClose, projectType, onPreFill, sendMes
 										value={input}
 										onChange={(e) => setInput(e.target.value)}
 										className="w-full h-full p-2 rounded-md focus:outline-none resize-none bg-muted text-foreground"
-										aria-label={`Share your thoughts about your ${projectType}`}
+										aria-label={t("chatScreen.projectDialog.ariaLabel", { projectType })}
 									/>
 									{input === "" && (
 										<div
@@ -167,7 +169,7 @@ export function ProjectDialog({ isOpen, onClose, projectType, onPreFill, sendMes
 										className="max-w-[200px] flex items-center gap-2"
 										variant="outline">
 										<RefreshCcw className="w-4 h-4" />
-										Cycle Prompt
+										{t("chatScreen.projectDialog.cyclePrompt")}
 									</Button>
 									<Button
 										type="button"
@@ -175,11 +177,11 @@ export function ProjectDialog({ isOpen, onClose, projectType, onPreFill, sendMes
 										className="max-w-[200px] flex items-center gap-2"
 										variant="outline">
 										<Lightbulb className="w-4 h-4" />
-										Use Prompt
+										{t("chatScreen.projectDialog.usePrompt")}
 									</Button>
 									<Button type="submit" className="max-w-[200px]">
 										<Rocket className="w-4 h-4 mr-2" />
-										GO
+										{t("chatScreen.projectDialog.go")}
 									</Button>
 								</div>
 							</form>
@@ -195,6 +197,7 @@ const ChatScreen: React.FC<{
 	handleClick: (value: string) => void
 	taskHistory: React.ReactNode
 }> = ({ handleClick, taskHistory }) => {
+	const { t } = useTranslation()
 	const [showHistory, setShowHistory] = useState(true)
 	const [greeting, setGreeting] = useState("")
 	const [showProjectDialog, setShowProjectDialog] = useState(false)
@@ -203,16 +206,16 @@ const ChatScreen: React.FC<{
 	useEffect(() => {
 		const updateGreeting = () => {
 			const hour = new Date().getHours()
-			if (hour >= 5 && hour < 12) setGreeting("Good morning")
-			else if (hour >= 12 && hour < 18) setGreeting("Good afternoon")
-			else if (hour >= 18 && hour < 22) setGreeting("Good evening")
-			else setGreeting("Happy late night")
+			if (hour >= 5 && hour < 12) setGreeting(t("chatScreen.greeting.morning"))
+			else if (hour >= 12 && hour < 18) setGreeting(t("chatScreen.greeting.afternoon"))
+			else if (hour >= 18 && hour < 22) setGreeting(t("chatScreen.greeting.evening"))
+			else setGreeting(t("chatScreen.greeting.night"))
 		}
 
 		updateGreeting()
 		const interval = setInterval(updateGreeting, 60000)
 		return () => clearInterval(interval)
-	}, [])
+	}, [t])
 
 	const selectStartOption = (type: ProjectType) => {
 		setProjectType(type)
@@ -222,32 +225,32 @@ const ChatScreen: React.FC<{
 	const quickStartOptions = [
 		{
 			icon: LayoutIcon,
-			title: "Let's build a landing page",
-			description: "Create an impactful first impression",
+			title: t("chatScreen.quickStart.landingPage.title"),
+			description: t("chatScreen.quickStart.landingPage.description"),
 			onClick: () => selectStartOption("landingPage"),
 		},
 		{
 			icon: BarChartIcon,
-			title: "Let's build a dashboard",
-			description: "Visualize data effectively",
+			title: t("chatScreen.quickStart.dashboard.title"),
+			description: t("chatScreen.quickStart.dashboard.description"),
 			onClick: () => selectStartOption("dashboard"),
 		},
 		{
 			icon: SmartphoneIcon,
-			title: "Let's build a mobile application",
-			description: "Develop for iOS and Android",
+			title: t("chatScreen.quickStart.mobileApp.title"),
+			description: t("chatScreen.quickStart.mobileApp.description"),
 			onClick: () => selectStartOption("mobileApp"),
 		},
 		{
 			icon: CodeIcon,
-			title: "Custom project",
-			description: "Start with your own idea",
+			title: t("chatScreen.quickStart.customProject.title"),
+			description: t("chatScreen.quickStart.customProject.description"),
 			onClick: () => selectStartOption("customProject"),
 		},
 		{
 			icon: History,
-			title: "View previous tasks",
-			description: "Resume a previous task",
+			title: t("chatScreen.quickStart.viewHistory.title"),
+			description: t("chatScreen.quickStart.viewHistory.description"),
 			onClick: () => setShowHistory(true),
 		},
 	]
@@ -291,7 +294,7 @@ const ChatScreen: React.FC<{
 									exit={{ opacity: 0, y: -20 }}
 									transition={{ duration: 0.3 }}
 									className="mt-2 text-xl sm:text-2xl md:text-3xl">
-									{showHistory ? "Your previous tasks" : "What should we build today?"}
+									{showHistory ? t("chatScreen.previousTasks") : t("chatScreen.whatToBuild")}
 								</motion.div>
 							</AnimatePresence>
 						</CardTitle>

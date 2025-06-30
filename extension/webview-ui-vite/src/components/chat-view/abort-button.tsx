@@ -4,6 +4,7 @@ import { hasShownAbortTooltipAtom } from "@/lib/atoms"
 import { Button } from "../ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "../ui/tooltip"
 import { PauseCircle } from "lucide-react"
+import { useTranslation } from "@/hooks/useTranslation"
 
 interface AbortButtonProps {
 	isAborting: boolean
@@ -11,6 +12,7 @@ interface AbortButtonProps {
 }
 
 export const AbortButton: React.FC<AbortButtonProps> = ({ isAborting, onAbort }) => {
+	const { t } = useTranslation()
 	const [hasShownTooltip, setHasShownTooltip] = useAtom(hasShownAbortTooltipAtom)
 
 	useEffect(() => {
@@ -32,14 +34,14 @@ export const AbortButton: React.FC<AbortButtonProps> = ({ isAborting, onAbort })
 						variant="ghost"
 						className="!p-1 h-6 w-6"
 						size="icon"
-						aria-label="Abort Request"
+						aria-label={t("abortButton.ariaLabel")}
 						onClick={onAbort}
 						style={{ marginRight: "2px" }}>
 						<PauseCircle size={16} />
 					</Button>
 				</TooltipTrigger>
 				<TooltipContent>
-					<p>Click here to abort request</p>
+					<p>{t("abortButton.tooltip")}</p>
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>

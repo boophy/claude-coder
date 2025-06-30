@@ -15,8 +15,10 @@ import { Separator } from "../ui/separator"
 import PreferencesTabNew from "./preferences/preferences-tab"
 import { useAtom } from "jotai"
 import { PreferencesTab, preferencesTabAtom, tabItems } from "./preferences/atoms"
+import { useTranslation } from "@/hooks/useTranslation"
 
 const SettingsPage: React.FC = () => {
+	const { t } = useTranslation()
 	const [activeTab, setActiveTab] = useAtom(preferencesTabAtom)
 	const [isMobile, setIsMobile] = useState(false)
 
@@ -42,21 +44,31 @@ const SettingsPage: React.FC = () => {
 		),
 		[activeTab]
 	)
+	const getTabTranslation = (tabValue: string, t: (key: string) => string): string => {
+		return t(`settings.tabs.${tabValue}`);
+	}
+
+	const translatedTabItems = useMemo(() => {
+		return tabItems.map((item) => ({
+			...item,
+			label: getTabTranslation(item.value, t),
+		}))
+	}, [t])
 
 	const tabPicker = useMemo(
 		() => (
 			<>
 				{isMobile ? (
 					<div>
-						<Label>Settings</Label>
+						<Label>{t("settings.title")}</Label>
 						<Select value={activeTab} onValueChange={handleTabChange}>
 							<SelectTrigger className="w-full mb-2.5 mt-1">
-								<SelectValue placeholder="Select a tab" />
+								<SelectValue placeholder={t("settings.selectTabPlaceholder")} />
 							</SelectTrigger>
 							<SelectContent>
-								{tabItems.map((item) => (
+								{translatedTabItems.map((item) => (
 									<SelectItem key={item.value} value={item.value}>
-										{item.label} Tab
+										{item.label}
 									</SelectItem>
 								))}
 							</SelectContent>
@@ -72,7 +84,7 @@ const SettingsPage: React.FC = () => {
 						}}
 						className="space-y-4 mx-auto">
 						<TabsList>
-							{tabItems.map((item) => (
+							{translatedTabItems.map((item) => (
 								<TabsTrigger className="p-1.5 text-xs" key={item.value} value={item.value}>
 									{item.label}
 								</TabsTrigger>
@@ -82,16 +94,16 @@ const SettingsPage: React.FC = () => {
 				)}
 			</>
 		),
-		[activeTab, isMobile, handleTabChange]
+		[activeTab, isMobile, handleTabChange, t, translatedTabItems]
 	)
 
 	return (
 		<div className="container mx-auto px-4 max-[280px]:px-2 py-4 max-w-[500px] flex flex-col h-full">
 			<div className="flex items-center justify-between">
-				<h1 className="text-xl font-bold mb-2">Settings</h1>
+				<h1 className="text-xl font-bold mb-2">{t("settings.title")}</h1>
 				<ClosePageButton />
 			</div>
-			<p className="text-xs text-muted-foreground mb-4">Manage your extension preferences</p>
+			<p className="text-xs text-muted-foreground mb-4">{t("settings.description")}</p>
 
 			<div className="mb-4 space-y-3">
 				<UserInfoSection />

@@ -5,6 +5,7 @@ import MarkdownRenderer from "./markdown-renderer"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible"
 import { Button } from "../ui/button"
 import { useCollapseState } from "@/hooks/use-collapse-state"
+import { useTranslation } from "@/hooks/useTranslation"
 
 interface ThinkingSummaryProps {
 	content: string
@@ -13,6 +14,7 @@ interface ThinkingSummaryProps {
 }
 
 export const ThinkingSummaryRow: React.FC<ThinkingSummaryProps> = ({ content, messageTs, forceCollapsed }) => {
+	const { t } = useTranslation()
 	const { isCollapsed, toggleCollapse } = useCollapseState()
 	// If no messageTs provided, don't collapse
 	// If forceCollapsed is true, we force it to be collapsed
@@ -25,7 +27,7 @@ export const ThinkingSummaryRow: React.FC<ThinkingSummaryProps> = ({ content, me
 					<CollapsibleTrigger asChild>
 						<Button variant="ghost" size="sm" className="gap-1">
 							<BrainCircuit className="size-4 text-primary" />
-							<span className="text-xs font-medium mr-2">Thinking Summary</span>
+							<span className="text-xs font-medium mr-2">{t("thinkingSummary.title")}</span>
 							<ChevronDown
 								className="size-4 transition-transform duration-200"
 								style={{
@@ -55,6 +57,7 @@ interface ExecutionPlanProps {
 }
 
 export const ExecutionPlanRow: React.FC<ExecutionPlanProps> = ({ content, messageTs, forceCollapsed }) => {
+	const { t } = useTranslation()
 	const { isCollapsed, toggleCollapse } = useCollapseState()
 	// If no messageTs provided, don't collapse
 	// If forceCollapsed is true, we force it to be collapsed
@@ -67,7 +70,7 @@ export const ExecutionPlanRow: React.FC<ExecutionPlanProps> = ({ content, messag
 					<CollapsibleTrigger asChild>
 						<Button variant="ghost" size="sm" className="gap-1">
 							<Lightbulb className="size-4 text-warning" />
-							<span className="text-xs font-medium mr-2">Execution Plan</span>
+							<span className="text-xs font-medium mr-2">{t("executionPlan.title")}</span>
 							<ChevronDown
 								className="size-4 transition-transform duration-200"
 								style={{

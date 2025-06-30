@@ -7,6 +7,7 @@ import { TextMessage } from "./chat-row-utils"
 import { ScrollArea, ScrollBar } from "../ui/scroll-area"
 import { cn } from "@/lib/utils"
 import MarkdownRenderer from "./markdown-renderer"
+import { useTranslation } from "@/hooks/useTranslation"
 
 interface ReasoningRowProps {
 	message: V1ClaudeMessage
@@ -22,27 +23,29 @@ const ThreeDotsLoading = () => {
 	)
 }
 
-function formatThoughtDuration(startTimestamp: number, endTimestamp?: number): string {
-	if (!endTimestamp) {
-		return "Thought for a short moment"
-	}
-	const differenceMs = Math.abs(endTimestamp - startTimestamp)
-	const seconds = differenceMs / 1000
-
-	if (differenceMs < 1000) {
-		return "Thought for less than a second"
-	}
-
-	const fullSeconds = Math.floor(seconds)
-	return fullSeconds === 1 ? "Thought 1 second" : `Thought ${fullSeconds} seconds`
-}
 export const ReasoningRow: React.FC<ReasoningRowProps> = ({ message }) => {
+	const { t } = useTranslation()
 	const [open, setOpen] = useState(false)
 	const [manuallyCollapsed, setManuallyCollapsed] = useState(false)
 	const isFetching = useMemo(
 		() => message.reasoning && message.isFetching && !message.reasoning?.finishedAt,
 		[message.isFetching, message.reasoning]
 	)
+
+	const formatThoughtDuration = (startTimestamp: number, endTimestamp?: number): string => {
+		if (!endTimestamp) {
+			return t("reasoning.thoughtShort")
+		}
+		const differenceMs = Math.abs(endTimestamp - startTimestamp)
+		const seconds = differenceMs / 1000
+
+		if (differenceMs < 1000) {
+			return t("reasoning.thoughtLessThanASecond")
+		}
+
+		const fullSeconds = Math.floor(seconds)
+		return t("reasoning.thoughtSeconds", { count: fullSeconds })
+	}
 
 	useEffect(() => {
 		if (isFetching && !manuallyCollapsed) {
@@ -70,7 +73,7 @@ export const ReasoningRow: React.FC<ReasoningRowProps> = ({ message }) => {
 							<span className="text-xs font-medium mr-2">
 								{!message.isError &&
 									(isFetching
-										? "Thinking..."
+										? t("reasoning.thinking")
 										: formatThoughtDuration(
 												message.reasoning?.startedAt,
 												message.reasoning?.finishedAt
@@ -81,7 +84,7 @@ export const ReasoningRow: React.FC<ReasoningRowProps> = ({ message }) => {
 												message.reasoning?.startedAt,
 												message.reasoning?.finishedAt
 										  )
-										: "Thinking Inturrupted")}
+										: t("reasoning.thinkingInterrupted"))}
 							</span>
 							<ChevronDown
 								className="size-4 transition-transform duration-200"

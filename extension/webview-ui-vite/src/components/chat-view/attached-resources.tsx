@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Resource } from "extension/shared/messages/client-message"
+import { useTranslation } from "@/hooks/useTranslation"
 
 type AttachedResourcesProps = {
 	resources: Resource[]
@@ -14,6 +15,7 @@ type AttachedResourcesProps = {
 }
 
 const AttachedResources: React.FC<AttachedResourcesProps> = ({ resources, onRemove, onRemoveAll }) => {
+	const { t } = useTranslation()
 	const [isDialogOpen, setIsDialogOpen] = useState(false)
 	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
 
@@ -70,7 +72,7 @@ const AttachedResources: React.FC<AttachedResourcesProps> = ({ resources, onRemo
 							size="sm"
 							onClick={() => setIsDialogOpen(true)}
 							className="flex items-center">
-							<span className="mr-1">See All ({resources.length})</span>
+							<span className="mr-1">{t("attachedResources.seeAll", { count: resources.length })}</span>
 							<ChevronRight className="w-4 h-4" />
 						</Button>
 					)}
@@ -80,7 +82,7 @@ const AttachedResources: React.FC<AttachedResourcesProps> = ({ resources, onRemo
 			<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 				<DialogContent className="sm:max-w-[425px]">
 					<DialogHeader>
-						<DialogTitle>All Attached Resources</DialogTitle>
+						<DialogTitle>{t("attachedResources.dialogTitle")}</DialogTitle>
 					</DialogHeader>
 					<ScrollArea className="h-[300px] w-full pr-4">
 						<div className="grid gap-4">
@@ -95,7 +97,7 @@ const AttachedResources: React.FC<AttachedResourcesProps> = ({ resources, onRemo
 							onClick={() => setShowDeleteConfirmation(true)}
 							className="w-full sm:w-auto">
 							<Trash2 className="w-4 h-4 mr-2" />
-							Delete All
+							{t("attachedResources.deleteAll")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>
@@ -104,20 +106,20 @@ const AttachedResources: React.FC<AttachedResourcesProps> = ({ resources, onRemo
 			<Dialog open={showDeleteConfirmation} onOpenChange={setShowDeleteConfirmation}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Confirm Deletion</DialogTitle>
+						<DialogTitle>{t("attachedResources.confirmDeletion.title")}</DialogTitle>
 					</DialogHeader>
 					<Alert variant="destructive">
-						<AlertTitle>Warning</AlertTitle>
+						<AlertTitle>{t("attachedResources.confirmDeletion.warningTitle")}</AlertTitle>
 						<AlertDescription>
-							Are you sure you want to delete all attached resources? This action cannot be undone.
+							{t("attachedResources.confirmDeletion.warningDescription")}
 						</AlertDescription>
 					</Alert>
 					<DialogFooter>
 						<Button variant="outline" onClick={() => setShowDeleteConfirmation(false)}>
-							Cancel
+							{t("attachedResources.confirmDeletion.cancel")}
 						</Button>
 						<Button variant="destructive" onClick={handleDeleteAll}>
-							Delete All
+							{t("attachedResources.deleteAll")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>

@@ -21,6 +21,7 @@ import TaskHeader from "../task-header/task-header"
 import { Button } from "../ui/button"
 import { AlertCircle } from "lucide-react"
 import AnnouncementBanner from "../announcement-banner"
+import { useTranslation } from "@/hooks/useTranslation"
 
 const ChatView: React.FC<ChatViewProps> = ({
 	isHidden,
@@ -28,6 +29,7 @@ const ChatView: React.FC<ChatViewProps> = ({
 	selectedModelSupportsPromptCache,
 	showHistoryView,
 }) => {
+	const { t } = useTranslation();
 	const [state, setState] = useAtom(chatStateAtom)
 	const [isMaxContextReached, setIsMaxContextReached] = useState(false)
 
@@ -239,7 +241,7 @@ const ChatView: React.FC<ChatViewProps> = ({
 					vscode.postMessage({
 						type: "askResponse",
 						askResponse: "yesButtonTapped",
-						text: "Let's resume the task from where we left off",
+						text: t("chat.resumeTask"),
 					})
 				}, 100)
 				if (state.claudeAsk === "tool") {
@@ -258,7 +260,7 @@ const ChatView: React.FC<ChatViewProps> = ({
 			secondaryButtonText: undefined,
 			enableButtons: false,
 		})
-	}, [state.claudeAsk, updateState])
+	}, [state.claudeAsk, updateState, t])
 
 	const handleSecondaryButtonClick = useCallback(() => {
 		switch (state.claudeAsk) {
@@ -364,17 +366,15 @@ const ChatView: React.FC<ChatViewProps> = ({
 					<div className="flex flex-col gap-1">
 						<div className="flex items-center gap-2">
 							<AlertCircle className="h-4 w-4 text-destructive" />
-							<span className="text-sm font-bold">Maximum context limit reached</span>
+							<span className="text-sm font-bold">{t("chat.maxContextReached.title")}</span>
 						</div>
 						<span className="text-sm">
-							The conversation has reached its context window limit and cannot continue further. To
-							proceed, you'll need to start a new task. Don't worry - Kodu will still have access to your
-							project's files and structure in the new task.
+							{t("chat.maxContextReached.description")}
 						</span>
 					</div>
 					<div className="flex justify-end">
 						<Button variant="default" onClick={() => vscode.postMessage({ type: "clearTask" })}>
-							Start New Task
+							{t("chat.maxContextReached.button")}
 						</Button>
 					</div>
 				</div>

@@ -2,6 +2,7 @@ import { vscode } from "@/utils/vscode"
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import { Button } from "../ui/button"
 import { useExtensionState } from "@/context/extension-state-context"
+import { useTranslation } from "@/hooks/useTranslation"
 
 interface ButtonSectionProps {
 	primaryButtonText: string | undefined
@@ -29,16 +30,17 @@ function ButtonSection({
 	isRequestRunning,
 	handleSecondaryButtonClick,
 }: ButtonSectionProps) {
+	const { t } = useTranslation()
 	const [isPending, startTransition] = useTransition()
 	const isAutomaticMode = useIsAutomaticMode()
 	const [isAutomaticPaused, setIsAutomaticPaused] = useState(false)
 	const isRequireUserInput =
-		primaryButtonText?.includes("Resume Task") ||
-		secondaryButtonText?.includes("Resume Task") ||
-		primaryButtonText?.includes("Start New Task") ||
-		secondaryButtonText?.includes("Start New Task") ||
-		primaryButtonText?.includes("Mark as Completed") ||
-		secondaryButtonText?.includes("Mark as Incomplete")
+		primaryButtonText?.includes(t("buttonSection.resumeTask")) ||
+		secondaryButtonText?.includes(t("buttonSection.resumeTask")) ||
+		primaryButtonText?.includes(t("buttonSection.startNewTask")) ||
+		secondaryButtonText?.includes(t("buttonSection.startNewTask")) ||
+		primaryButtonText?.includes(t("buttonSection.markAsCompleted")) ||
+		secondaryButtonText?.includes(t("buttonSection.markAsIncomplete"))
 
 	const handlePauseOrResumeAutomatic = useCallback(() => {
 		setIsAutomaticPaused(!isAutomaticPaused)
@@ -55,7 +57,7 @@ function ButtonSection({
 					className="transition-colors duration-200 ease-in-out flex-1 flex-grow"
 					variant="secondary"
 					onClick={handlePauseOrResumeAutomatic}>
-					{isAutomaticPaused ? "Resume Automatic" : "Pause Automatic"}
+					{isAutomaticPaused ? t("buttonSection.resumeAutomatic") : t("buttonSection.pauseAutomatic")}
 				</Button>
 			</div>
 		)
