@@ -1,5 +1,6 @@
 import React from "react"
 import { Button } from "@/components/ui/button"
+import { useTranslation } from "@/hooks/useTranslation"
 import { useExtensionState } from "../../context/extension-state-context"
 import { vscode } from "@/utils/vscode"
 import { formatPrice } from "./utils"
@@ -7,6 +8,7 @@ import { getKoduAddCreditsUrl, getKoduOfferUrl, getKoduSignInUrl } from "extensi
 import { GiftIcon, KeyIcon } from "lucide-react"
 
 const UserInfoSection: React.FC = () => {
+	const { t } = useTranslation()
 	const extensionState = useExtensionState()
 	const [isClicked, setIsClicked] = React.useState(false)
 
@@ -21,7 +23,7 @@ const UserInfoSection: React.FC = () => {
 					}}
 					asChild>
 					<a href={getKoduSignInUrl(extensionState.uriScheme, extensionState.extensionName)}>
-						Sign in to Kodu
+						{t("settings.userInfo.signIn")}
 					</a>
 				</Button>
 				{isClicked && (
@@ -31,7 +33,7 @@ const UserInfoSection: React.FC = () => {
 							vscode.postMessage({ type: "setApiKeyDialog" })
 						}}
 						variant={"link"}>
-						Have Api Key click here
+						{t("settings.userInfo.haveApiKey")}
 					</Button>
 				)}
 			</div>
@@ -42,18 +44,18 @@ const UserInfoSection: React.FC = () => {
 		<>
 			<div className="flex max-[280px]:items-start max-[280px]:flex-col max-[280px]:space-y-2 flex-row justify-between items-center">
 				<div>
-					<p className="text-xs font-medium">Signed in as</p>
+					<p className="text-xs font-medium">{t("settings.userInfo.signedInAs")}</p>
 					<p className="text-sm font-bold">{extensionState.user?.email}</p>
 					<Button
 						variant="link"
 						size="sm"
 						className="text-sm !text-muted-foreground"
 						onClick={() => vscode.postMessage({ type: "didClickKoduSignOut" })}>
-						sign out
+						{t("settings.userInfo.signOut")}
 					</Button>
 				</div>
 				<div className="max-[280px]:mt-2">
-					<p className="text-xs font-medium">Kodu Credits remaining</p>
+					<p className="text-xs font-medium">{t("settings.userInfo.creditsRemaining")}</p>
 					<p className="text-lg font-bold">{formatPrice(extensionState.user?.credits || 0)}</p>
 				</div>
 			</div>
@@ -64,7 +66,7 @@ const UserInfoSection: React.FC = () => {
 						vscode.postTrackingEvent("ExtensionCreditAddSelect", "purchase")
 					}}
 					asChild>
-					<a href={getKoduAddCreditsUrl(extensionState.uriScheme)}>Add Credits</a>
+					<a href={getKoduAddCreditsUrl(extensionState.uriScheme)}>{t("settings.userInfo.addCredits")}</a>
 				</Button>
 				<Button
 					onClick={() => {
@@ -75,7 +77,7 @@ const UserInfoSection: React.FC = () => {
 					asChild>
 					<a href={getKoduOfferUrl(extensionState.uriScheme)}>
 						<GiftIcon className="size-4 mr-1" />
-						$10 Free Credits
+						{t("settings.userInfo.freeCredits")}
 					</a>
 				</Button>
 			</div>

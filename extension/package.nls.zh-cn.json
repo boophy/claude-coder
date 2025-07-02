@@ -1,0 +1,12 @@
+{
+  "extension.displayName": "Kodu",
+  "extension.description": "您的 AI 编码助手。",
+  "viewsContainers.activitybar.title": "Kodu",
+  "commands.setApiKey.title": "设置 API 密钥",
+  "commands.openExternalLink.title": "打开外部链接",
+  "commands.plusButtonTapped.title": "新建任务",
+  "commands.historyButtonTapped.title": "历史记录",
+  "commands.popoutButtonTapped.title": "弹出",
+  "commands.settingsButtonTapped.title": "设置",
+  "commands.openInNewTab.title": "在新标签页中打开"
+}

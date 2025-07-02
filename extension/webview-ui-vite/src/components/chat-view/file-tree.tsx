@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { motion } from "framer-motion"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useTranslation } from "@/hooks/useTranslation"
 
 export type FileNode = {
 	id: string
@@ -24,6 +25,7 @@ type EnhancedFileTreeProps = {
 const MAX_SELECTED_ITEMS = 50
 
 export default function EnhancedFileTree({ initialFiles, onItemSelect, value }: EnhancedFileTreeProps) {
+	const { t } = useTranslation()
 	const [expandedFolders, setExpandedFolders] = useState<Set<string>>(() => {
 		const getAllFolderIds = (nodes: FileNode[]): string[] => {
 			return nodes.reduce<string[]>((acc, node) => {
@@ -232,7 +234,7 @@ export default function EnhancedFileTree({ initialFiles, onItemSelect, value }: 
 			<div className="mb-4 relative">
 				<Input
 					type="text"
-					placeholder="Filter files and folders..."
+					placeholder={t("fileTree.filterPlaceholder")}
 					value={filter}
 					onChange={(e) => setFilter(e.target.value)}
 					className="pl-10"
@@ -242,7 +244,7 @@ export default function EnhancedFileTree({ initialFiles, onItemSelect, value }: 
 			{showMaxError && (
 				<Alert variant="destructive" className="mb-4">
 					<AlertDescription>
-						Maximum selection limit reached. You can select up to {MAX_SELECTED_ITEMS} items.
+						{t("fileTree.maxSelectionError", { count: MAX_SELECTED_ITEMS })}
 					</AlertDescription>
 				</Alert>
 			)}

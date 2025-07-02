@@ -35,7 +35,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog"
-
+import { useTranslation } from "@/hooks/useTranslation"
 type DistributedKeys<T> = T extends any ? keyof T : never
 
 interface PresetsDropdownProps {
@@ -44,7 +44,7 @@ interface PresetsDropdownProps {
 
 const PresetsDropdown: React.FC<PresetsDropdownProps> = ({ onSelectPreset }) => {
 	const [showTooltip, setShowTooltip] = useState(true)
-
+	
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setShowTooltip(false)
@@ -92,7 +92,7 @@ const ProviderManager: React.FC = () => {
 	const [providerSettings, setProviderSettings] = useAtom(providerSettingsAtom)
 	const [error, setError] = useState<string>("")
 	const [showApplyModel, setShowApplyModel] = useState(false)
-
+	const {t} = useTranslation()
 	// Query existing providers
 	const { data: providersData, refetch } = rpcClient.listProviders.useQuery({})
 
@@ -309,10 +309,10 @@ const ProviderManager: React.FC = () => {
 								checked={customSettings.supportImages}
 								onCheckedChange={(checked) => updateSettings("supportImages", checked)}
 							/>
-							<Label htmlFor="supportImages">Support Images</Label>
+							<Label htmlFor="supportImages">{t("settings.preferences.image")}</Label>
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="inputLimit">Input Limit</Label>
+							<Label htmlFor="inputLimit">{t("settings.preferences.context")}</Label>
 							<Input
 								type="number"
 								id="inputLimit"
@@ -322,7 +322,7 @@ const ProviderManager: React.FC = () => {
 							/>
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="outputLimit">Output Limit</Label>
+							<Label htmlFor="outputLimit">{t("settings.preferences.limit")}</Label>
 							<Input
 								id="outputLimit"
 								type="number"
@@ -332,7 +332,7 @@ const ProviderManager: React.FC = () => {
 							/>
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="inputTokensPrice">Input Tokens Price</Label>
+							<Label htmlFor="inputTokensPrice">{t("settings.preferences.inputCost")}</Label>
 							<Input
 								id="inputTokensPrice"
 								type="number"
@@ -342,7 +342,7 @@ const ProviderManager: React.FC = () => {
 							/>
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="outputTokensPrice">Output Tokens Price</Label>
+							<Label htmlFor="outputTokensPrice">{t("settings.preferences.outputCost")}</Label>
 							<Input
 								id="outputTokensPrice"
 								type="number"
@@ -352,7 +352,7 @@ const ProviderManager: React.FC = () => {
 							/>
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="cacheReadsPrice">Cache Reads Price (Optional)</Label>
+							<Label htmlFor="cacheReadsPrice">{t("settings.preferences.readCost")}</Label>
 							<Input
 								id="cacheReadsPrice"
 								type="number"
@@ -362,7 +362,7 @@ const ProviderManager: React.FC = () => {
 							/>
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="cacheWritesPrice">Cache Writes Price (Optional)</Label>
+							<Label htmlFor="cacheWritesPrice">{t("settings.preferences.writeCost")}</Label>
 							<Input
 								id="cacheWritesPrice"
 								type="number"
@@ -372,7 +372,7 @@ const ProviderManager: React.FC = () => {
 							/>
 						</div>
 						<span className="text-[11px] text-muted-foreground">
-							Prices should be written per million tokens
+							{t("settings.preferences.price")}
 						</span>
 					</>
 				)
@@ -401,10 +401,9 @@ const ProviderManager: React.FC = () => {
 			<Card className="bg-background border-border">
 				<CardContent className="p-6">
 					<div className="space-y-4">
-						<h2 className="text-xl font-semibold">Provider Settings</h2>
 						<div className="space-y-4">
 							<div className="space-y-2">
-								<Label htmlFor="providerId">Provider</Label>
+								<Label htmlFor="providerId">{t("settings.preferences.provider")}</Label>
 								<Select
 									value={providerSettings?.providerId || ""}
 									onValueChange={(value: ProviderType) => handleProviderChange(value)}>
@@ -442,7 +441,7 @@ const ProviderManager: React.FC = () => {
 							<Button
 								onClick={() => providerSettings && saveSettings(providerSettings)}
 								className="w-full h-9">
-								Save Settings
+								{t("settings.save")}
 							</Button>
 							{currentProvider && (
 								<Button
@@ -455,7 +454,7 @@ const ProviderManager: React.FC = () => {
 										}
 									}}
 									className="w-full h-9">
-									Delete Provider
+									{t("settings.preferences.delete")}
 								</Button>
 							)}
 						</div>
@@ -466,8 +465,8 @@ const ProviderManager: React.FC = () => {
 			<Dialog open={showApplyModel} onOpenChange={setShowApplyModel}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Apply Model</DialogTitle>
-						<DialogDescription>Would you like to apply this model as your current model?</DialogDescription>
+						<DialogTitle>{t("settings.preferences.apply")}</DialogTitle>
+						<DialogDescription>{t("settings.preferences.would")}</DialogDescription>
 					</DialogHeader>
 					<DialogFooter className="gap-2">
 						<Button
@@ -476,9 +475,9 @@ const ProviderManager: React.FC = () => {
 								setShowApplyModel(false)
 								switchView("select-model")
 							}}>
-							No, Select Different Model
+							{t("settings.preferences.no")}
 						</Button>
-						<Button onClick={handleApplyModel}>Yes, Apply Model</Button>
+						<Button onClick={handleApplyModel}>{t("settings.preferences.yes")}</Button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>

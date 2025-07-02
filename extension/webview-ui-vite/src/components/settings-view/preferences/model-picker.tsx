@@ -2,7 +2,7 @@ import React, { FC, useState, useMemo, useEffect } from "react"
 import { Check, Brain, Code2, Image, ChevronsUpDown, Info, AlertTriangleIcon } from "lucide-react"
 import { Virtuoso } from "react-virtuoso"
 import Fuse from "fuse.js"
-
+import { useTranslation } from "@/hooks/useTranslation"
 import { ModelInfo } from "extension/api/providers/types"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -56,7 +56,7 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 		(model) => model.id === modelId && model.provider === providerId
 	)
 	const switchToProvider = useSwitchToProviderManager()
-
+	const {t} = useTranslation()
 	// Create a Fuse instance for fuzzy searching
 	const fuse = useMemo(() => {
 		return new Fuse(models, {
@@ -127,8 +127,7 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 			{/* Title row with optional tooltips explaining terms */}
 			{!children && (
 				<div className="flex items-center justify-between">
-					<span className="text-sm font-medium">Pick a Model</span>
-
+					<span className="text-sm font-medium">{t("settings.preferences.pickerModel")}</span>
 					{/* Tooltip explaining CPM, context window, output limit */}
 					<TooltipProvider>
 						<Tooltip>
@@ -139,13 +138,13 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 							</TooltipTrigger>
 							<TooltipContent className="max-w-xs text-xs space-y-1">
 								<p>
-									<strong>CPM</strong>: Cost per million tokens
+									<strong>CPM</strong>: {t("settings.preferences.cpm")}
 								</p>
 								<p>
-									<strong>Context Window</strong>: Maximum input size in tokens
+									<strong>{t("settings.preferences.context")}</strong>: {t("settings.preferences.input")}
 								</p>
 								<p>
-									<strong>Output Limit</strong>: The max tokens the model can produce
+									<strong>{t("settings.preferences.limit")}</strong>: {t("settings.preferences.output")}
 								</p>
 							</TooltipContent>
 						</Tooltip>
@@ -223,7 +222,7 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 													Context: {model.contextWindow} | Output: {model.maxTokens}
 												</span>
 												<span className="text-[11px] text-muted-foreground">
-													Prices are shown per million tokens
+													{t("settings.preferences.price")}
 												</span>
 												{renderBadges(model)}
 											</CommandItem>
@@ -247,25 +246,25 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 								<Badge variant="default">{selectedModel.provider}</Badge>
 							</div>
 							<p className="text-xs text-muted-foreground">
-								<strong>Context Window:</strong> {selectedModel.contextWindow}
+								<strong>{t("settings.preferences.context")}:</strong> {selectedModel.contextWindow}
 								<br />
-								<strong>Output Limit:</strong> {selectedModel.maxTokens}
+								<strong>{t("settings.preferences.limit")}:</strong> {selectedModel.maxTokens}
 								<br />
-								<strong>Input Cost:</strong> ${selectedModel.inputPrice?.toFixed(2)}
+								<strong>{t("settings.preferences.inputCost")}:</strong> ${selectedModel.inputPrice?.toFixed(2)}
 								<br />
-								<strong>Output Cost:</strong> ${selectedModel.outputPrice?.toFixed(2)}
+								<strong>{t("settings.preferences.outputCost")}:</strong> ${selectedModel.outputPrice?.toFixed(2)}
 								{selectedModel.cacheWritesPrice && selectedModel.cacheReadsPrice && (
 									<>
 										<br />
-										<strong>Cache Writes Cost:</strong> $
+										<strong>{t("settings.preferences.writeCost")}:</strong> $
 										{selectedModel.cacheWritesPrice?.toFixed(2)}
 										<br />
-										<strong>Cache Reads Cost:</strong> ${selectedModel.cacheReadsPrice?.toFixed(2)}
+										<strong>{t("settings.preferences.readCost")}:</strong> ${selectedModel.cacheReadsPrice?.toFixed(2)}
 									</>
 								)}
 								<br />
 								<span className="text-[11px] text-muted-foreground">
-									Prices are shown per million tokens
+									{t("settings.preferences.price")}
 								</span>
 								<br />
 								{selectedModel.provider !== "kodu" &&
@@ -275,14 +274,14 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 												switchToProvider(selectedModel.provider)
 											}}
 											className="text-destructive text-[11px] hover:underline cursor-pointer">
-											Requires setting up a provider key. Click here to set up a provider.
+											{t("settings.preferences.reqKey")}
 										</span>
 									)}
 							</p>
 							{renderBadges(selectedModel, false)}
 						</div>
 					) : (
-						<p className="text-sm text-muted-foreground">No model selected yet.</p>
+						<p className="text-sm text-muted-foreground">{t("settings.preferences.noModel")}</p>
 					)}
 				</>
 			)}

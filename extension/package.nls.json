@@ -1,0 +1,12 @@
+{
+  "extension.displayName": "Kodu",
+  "extension.description": "Your AI coding assistant.",
+  "viewsContainers.activitybar.title": "Kodu",
+  "commands.setApiKey.title": "Set API Key",
+  "commands.openExternalLink.title": "Open External Link",
+  "commands.plusButtonTapped.title": "New Task",
+  "commands.historyButtonTapped.title": "History",
+  "commands.popoutButtonTapped.title": "Pop Out",
+  "commands.settingsButtonTapped.title": "Settings",
+  "commands.openInNewTab.title": "Open in New Tab"
+}

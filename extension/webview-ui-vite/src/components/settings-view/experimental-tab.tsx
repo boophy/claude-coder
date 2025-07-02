@@ -1,6 +1,6 @@
 import React from "react"
 import { useSettingsState } from "../../hooks/use-settings-state"
-import { experimentalFeatures } from "./constants"
+import { useExperimentalFeatures } from "./constants"
 import { ExperimentalFeatureItem } from "./experimental-feature-item"
 import { Label } from "../ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
@@ -12,6 +12,7 @@ const ExperimentalTab: React.FC = () => {
 		handleInlineEditingTypeChange,
 		inlineEditingType,
 	} = useSettingsState()
+	const experimentalFeatures = useExperimentalFeatures()
 
 	return (
 		<div className="space-y-4">

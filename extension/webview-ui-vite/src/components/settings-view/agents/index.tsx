@@ -5,21 +5,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import _ from "lodash"
 import { Badge } from "../../ui/badge"
 import { ObserverAgentCard } from "./observer-agent-card"
+import { useTranslation } from "@/hooks/useTranslation"
 
 const AgentsTab: React.FC = () => {
+	const { t } = useTranslation()
 	return (
 		<div className="space-y-4">
 			<Card>
 				<CardHeader>
 					<div className="flex items-center justify-between">
-						<CardTitle className="text-sm">Sub Task Agent</CardTitle>
-						<Badge>Enabled</Badge>
+						<CardTitle className="text-sm">{t("settings.agents.subTaskAgent.title")}</CardTitle>
+						<Badge>{t("settings.agents.subTaskAgent.badge")}</Badge>
 					</div>
 				</CardHeader>
 				<CardContent>
 					<CardDescription className="text-xs">
-						Let's kodu spawn a sequentual agent with isolated context only for a specifc task passing back
-						and the final information to Kodu main thread
+						{t("settings.agents.subTaskAgent.description")}
 					</CardDescription>
 				</CardContent>
 			</Card>
@@ -29,15 +30,13 @@ const AgentsTab: React.FC = () => {
 			<Card>
 				<CardHeader>
 					<div className="flex items-center justify-between">
-						<CardTitle className="text-sm">Coder Agent</CardTitle>
-						<Badge>Early Testing</Badge>
+						<CardTitle className="text-sm">{t("settings.agents.coderAgent.title")}</CardTitle>
+						<Badge>{t("settings.agents.coderAgent.badge")}</Badge>
 					</div>
 				</CardHeader>
 				<CardContent>
 					<CardDescription className="text-xs">
-						Switches Kodu to act as an architecture mode where it primary goal is to create a solution and
-						gather knowledge while leaving the complex editing logic to a seperate agent with isolated
-						context and tools to only perform code edits
+						{t("settings.agents.coderAgent.description")}
 					</CardDescription>
 				</CardContent>
 			</Card>
@@ -47,12 +46,12 @@ const AgentsTab: React.FC = () => {
 					<TooltipTrigger asChild>
 						<div>
 							<Button className="w-full" disabled>
-								Create Your Agent
+								{t("settings.agents.createAgent.button")}
 							</Button>
 						</div>
 					</TooltipTrigger>
 					<TooltipContent side="top">
-						<p className="text-xs">Coming Soon</p>
+						<p className="text-xs">{t("settings.agents.createAgent.tooltip")}</p>
 					</TooltipContent>
 				</Tooltip>
 			</TooltipProvider>

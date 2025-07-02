@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/useTranslation";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -12,6 +13,7 @@ import { ExperimentalFeatureItem } from "./experimental-feature-item"
 import { vscode } from "@/utils/vscode"
 
 const AdvancedTab: React.FC = () => {
+	const { t } = useTranslation()
 	const {
 		readOnly,
 		autoCloseTerminal,
@@ -49,11 +51,10 @@ const AdvancedTab: React.FC = () => {
 				<div className={"flex items-center justify-between"}>
 					<div className={"flex-1 pr-2"}>
 						<Label htmlFor="cutomizePrompt" className="text-xs font-medium flex items-center">
-							Customize Instructions
+							{t("settings.advanced.customizeInstructions.label")}
 						</Label>
 						<p className="text-[10px] text-muted-foreground">
-							Let's you customize the instructions that Kodu will follow when executing Tasks. You can
-							customize the tools and general instructions that Kodu will follow.
+							{t("settings.advanced.customizeInstructions.description")}
 						</p>
 					</div>
 
@@ -63,22 +64,22 @@ const AdvancedTab: React.FC = () => {
 						onClick={() => {
 							vscode.postMessage({ type: "openPromptEditor" })
 						}}>
-						Open Editor
+						{t("settings.advanced.customizeInstructions.button")}
 					</Button>
 				</div>
 				<div className="space-y-4">
 					<ExperimentalFeatureItem
 						feature={{
 							id: "gitHandlerEnabled",
-							label: "Git Handler",
-							description: "Enable or disable automatic git operations and version control",
+							label: t("settings.advanced.gitHandler.label"),
+							description: t("settings.advanced.gitHandler.description"),
 						}}
 						checked={gitHandlerEnabled}
 						onCheckedChange={handleSetGitHandlerEnabled}
 					/>
 					{gitHandlerEnabled && (
 						<div className="pl-6 space-y-2">
-							<Label className="text-xs font-medium">Git Committer</Label>
+							<Label className="text-xs font-medium">{t("settings.advanced.gitCommitter.label")}</Label>
 							<RadioGroup
 								value={gitCommitterType}
 								onValueChange={(value) => handleSetGitCommitterType(value as "kodu" | "user")}
@@ -86,18 +87,18 @@ const AdvancedTab: React.FC = () => {
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value="kodu" id="kodu" />
 									<Label htmlFor="kodu" className="text-sm">
-										Kodu AI
+										{t("settings.advanced.gitCommitter.kodu")}
 									</Label>
 								</div>
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value="user" id="user" />
 									<Label htmlFor="user" className="text-sm">
-										User Profile
+										{t("settings.advanced.gitCommitter.user")}
 									</Label>
 								</div>
 							</RadioGroup>
 							<p className="text-[10px] text-muted-foreground">
-								Choose who should be credited for git commits
+								{t("settings.advanced.gitCommitter.description")}
 							</p>
 						</div>
 					)}
@@ -105,8 +106,8 @@ const AdvancedTab: React.FC = () => {
 				<ExperimentalFeatureItem
 					feature={{
 						id: "alwaysAllowReadOnly",
-						label: "Always Allow Read-Only Operations",
-						description: "Automatically read files and view directories without requiring permission",
+						label: t("settings.advanced.alwaysAllowReadOnly.label"),
+						description: t("settings.advanced.alwaysAllowReadOnly.description"),
 					}}
 					checked={readOnly}
 					onCheckedChange={handleSetReadOnly}
@@ -114,8 +115,8 @@ const AdvancedTab: React.FC = () => {
 				<ExperimentalFeatureItem
 					feature={{
 						id: "autoCloseTerminal",
-						label: "Automatically close terminal",
-						description: "Automatically close the terminal after executing a command",
+						label: t("settings.advanced.autoCloseTerminal.label"),
+						description: t("settings.advanced.autoCloseTerminal.description"),
 					}}
 					checked={autoCloseTerminal}
 					onCheckedChange={handleSetAutoCloseTerminal}
@@ -125,9 +126,8 @@ const AdvancedTab: React.FC = () => {
 					<ExperimentalFeatureItem
 						feature={{
 							id: "terminalCompressionThreshold",
-							label: "Enable Terminal Compression",
-							description:
-								"Compress terminal output to reduce token usage when the output exceeds the threshold at the end of context window",
+							label: t("settings.advanced.terminalCompression.label"),
+							description: t("settings.advanced.terminalCompression.description"),
 						}}
 						checked={terminalCompressionThreshold !== undefined}
 						onCheckedChange={(checked) =>
@@ -137,7 +137,7 @@ const AdvancedTab: React.FC = () => {
 					{terminalCompressionThreshold !== undefined && (
 						<div className="pl-0 grid gap-4">
 							<div className="grid gap-2">
-								<Label htmlFor="range">Compression Threshold</Label>
+								<Label htmlFor="range">{t("settings.advanced.terminalCompression.thresholdLabel")}</Label>
 								<div className="grid gap-4">
 									<div className="flex items-center gap-4">
 										<Input
@@ -169,7 +169,7 @@ const AdvancedTab: React.FC = () => {
 									/>
 								</div>
 								<p className="text-sm text-muted-foreground">
-									Adjust the token threshold at which terminal output will be compressed
+									{t("settings.advanced.terminalCompression.thresholdDescription")}
 								</p>
 							</div>
 						</div>
@@ -179,7 +179,7 @@ const AdvancedTab: React.FC = () => {
 			<div className="space-y-4 mx-0">
 				<div className="pl-0 grid gap-4">
 					<div className="grid gap-2">
-						<Label htmlFor="range">Command Timeout</Label>
+						<Label htmlFor="range">{t("settings.advanced.commandTimeout.label")}</Label>
 						<div className="grid gap-4">
 							<div className="flex items-center gap-4">
 								<Input
@@ -209,7 +209,7 @@ const AdvancedTab: React.FC = () => {
 							/>
 						</div>
 						<p className="text-sm text-muted-foreground">
-							Set the maximum time in seconds that a command can run before being terminated
+							{t("settings.advanced.commandTimeout.description")}
 						</p>
 					</div>
 				</div>
@@ -217,11 +217,11 @@ const AdvancedTab: React.FC = () => {
 			<div className="space-y-4">
 				<div className="space-y-2">
 					<Label htmlFor="custom-instructions" className="text-xs font-medium">
-						Custom Instructions
+						{t("settings.advanced.customInstructions.label")}
 					</Label>
 					<Textarea
 						id="custom-instructions"
-						placeholder="e.g. 'Run unit tests at the end', 'Use TypeScript with async/await'"
+						placeholder={t("settings.advanced.customInstructions.placeholder")}
 						value={customInstructions}
 						onChange={handleTextAreaChange}
 						className="min-h-[120px] text-xs resize-y"
@@ -231,7 +231,7 @@ const AdvancedTab: React.FC = () => {
 						spellCheck={false}
 					/>
 					<p className="text-xs text-muted-foreground mt-1">
-						These instructions will be included in every task
+						{t("settings.advanced.customInstructions.description")}
 					</p>
 				</div>
 			</div>

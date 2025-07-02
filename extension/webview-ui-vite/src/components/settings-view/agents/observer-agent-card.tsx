@@ -7,8 +7,10 @@ import { ModelSelector } from "../preferences/model-picker"
 import { ChevronDown } from "lucide-react"
 import { rpcClient } from "@/lib/rpc-client"
 import { useSwitchToProviderManager } from "../preferences/atoms"
+import { useTranslation } from "@/hooks/useTranslation"
 
 export const ObserverAgentCard = () => {
+	const { t } = useTranslation()
 	const { data, refetch } = rpcClient.getObserverSettings.useQuery(
 		{},
 		{
@@ -82,27 +84,24 @@ export const ObserverAgentCard = () => {
 		<Card>
 			<CardHeader>
 				<div className="flex items-center justify-between">
-					<CardTitle className="text-sm">Observer Agent</CardTitle>
+					<CardTitle className="text-sm">{t("settings.agents.observerAgent.title")}</CardTitle>
 					<Switch
 						checked={observerEnabled}
 						onCheckedChange={(e) => setObserverEnabled({ enabled: e })}
-						aria-label="Toggle observer agent"
+						aria-label={t("settings.agents.observerAgent.toggleAriaLabel")}
 					/>
 				</div>
 			</CardHeader>
 			<CardContent className="space-y-4">
 				<CardDescription className="text-xs">
-					An intelligent observer that monitors Kodu's actions in real-time, providing feedback and insights
-					to help optimize performance. The observer analyzes patterns, suggests improvements, and helps
-					maintain alignment with your goals through continuous evaluation and feedback.
+					{t("settings.agents.observerAgent.description")}
 				</CardDescription>
 				{observerEnabled && observerSettings && (
 					<div className="flex flex-col gap-4">
 						<div className="space-y-2">
-							<Label className="text-xs">Observer Frequency (requests)</Label>
+							<Label className="text-xs">{t("settings.agents.observerAgent.frequency.label")}</Label>
 							<div className="text-xs text-muted-foreground mb-2">
-								How often the observer agent should analyze Kodu's actions. Lower values mean more
-								frequent observations but may impact performance.
+								{t("settings.agents.observerAgent.frequency.description")}
 							</div>
 							<Slider
 								value={[observerSettings.observeEveryXRequests]}
@@ -113,15 +112,13 @@ export const ObserverAgentCard = () => {
 								className="w-full"
 							/>
 							<div className="text-xs text-muted-foreground">
-								Current: Every {observerSettings.observeEveryXRequests} request
-								{observerSettings.observeEveryXRequests > 1 ? "s" : ""}
+								{t("settings.agents.observerAgent.frequency.current", { count: observerSettings.observeEveryXRequests })}
 							</div>
 						</div>
 						<div className="space-y-2">
-							<Label className="text-xs">Messages to Analyze</Label>
+							<Label className="text-xs">{t("settings.agents.observerAgent.messagesToAnalyze.label")}</Label>
 							<div className="text-xs text-muted-foreground mb-2">
-								Number of previous messages the observer will review for context. More messages provide
-								better context but may increase processing time.
+								{t("settings.agents.observerAgent.messagesToAnalyze.description")}
 							</div>
 							<Slider
 								value={[observerSettings.observePullMessages]}
@@ -132,15 +129,13 @@ export const ObserverAgentCard = () => {
 								className="w-full"
 							/>
 							<div className="text-xs text-muted-foreground">
-								Current: {observerSettings.observePullMessages} message
-								{observerSettings.observePullMessages > 1 ? "s" : ""}
+								{t("settings.agents.observerAgent.messagesToAnalyze.current", { count: observerSettings.observePullMessages })}
 							</div>
 						</div>
 						<div className="space-y-2">
-							<Label className="text-xs">Select Observer Model</Label>
+							<Label className="text-xs">{t("settings.agents.observerAgent.selectModel.label")}</Label>
 							<div className="text-xs text-muted-foreground mb-2">
-								The AI model that will analyze Kodu's actions. Different models may offer varying levels
-								of insight and performance.
+								{t("settings.agents.observerAgent.selectModel.description")}
 							</div>
 							<ModelSelector
 								models={modelListData?.models ?? []}
@@ -152,7 +147,7 @@ export const ObserverAgentCard = () => {
 									variant="ghost"
 									className="text-xs flex items-center gap-1 h-6 px-2 hover:bg-accent">
 									{modelListData?.models.find((m) => m.id === observerSettings.modelId)?.name ||
-										"Select Model"}
+										t("settings.agents.observerAgent.selectModel.selectModelButton")}
 									<ChevronDown className="w-4 h-4" />
 								</Button>
 							</ModelSelector>
@@ -164,15 +159,14 @@ export const ObserverAgentCard = () => {
 											switchToProvider(data.observerSettings?.providerId!)
 										}}
 										className="text-destructive text-[11px] hover:underline cursor-pointer">
-										Requires setting up a provider key. Click here to set up a provider.
+										{t("settings.agents.observerAgent.selectModel.setupProvider")}
 									</span>
 								)}
 						</div>
 						<div className="space-y-2 mb-4">
-							<Label className="text-xs">Custom Prompt</Label>
+							<Label className="text-xs">{t("settings.agents.observerAgent.customPrompt.label")}</Label>
 							<div className="text-xs text-muted-foreground mb-2">
-								Customize the observer's prompt to provide special instructions or context for the
-								model.
+								{t("settings.agents.observerAgent.customPrompt.description")}
 							</div>
 							<div className="flex flex-row gap-2 items-center flex-wrap">
 								<Button
@@ -183,7 +177,7 @@ export const ObserverAgentCard = () => {
 									variant="default"
 									size="sm"
 									className="text-xs w-auto">
-									Edit Prompt
+									{t("settings.agents.observerAgent.customPrompt.editButton")}
 								</Button>
 								{observerSettings.observePrompt && (
 									<Button
@@ -191,7 +185,7 @@ export const ObserverAgentCard = () => {
 										className="text-xs w-auto"
 										size="sm"
 										onClick={() => updateSettings({ clearPrompt: true })}>
-										Clear Prompt
+										{t("settings.agents.observerAgent.customPrompt.clearButton")}
 									</Button>
 								)}
 							</div>

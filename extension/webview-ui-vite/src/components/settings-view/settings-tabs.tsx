@@ -16,6 +16,7 @@ import PreferencesTabNew from "./preferences/preferences-tab"
 import { useAtom } from "jotai"
 import { PreferencesTab, preferencesTabAtom, tabItems } from "./preferences/atoms"
 import { useTranslation } from "@/hooks/useTranslation"
+import { TranslationKey } from "@/i18n"
 
 const SettingsPage: React.FC = () => {
 	const { t } = useTranslation()
@@ -44,14 +45,10 @@ const SettingsPage: React.FC = () => {
 		),
 		[activeTab]
 	)
-	const getTabTranslation = (tabValue: string, t: (key: string) => string): string => {
-		return t(`settings.tabs.${tabValue}`);
-	}
-
 	const translatedTabItems = useMemo(() => {
 		return tabItems.map((item) => ({
 			...item,
-			label: getTabTranslation(item.value, t),
+			label: t(`settings.tabs.${item.value}` as TranslationKey)
 		}))
 	}, [t])
 
