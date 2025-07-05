@@ -159,6 +159,7 @@ export const en = {
         }
     },
     "chat": {
+      "start":"Type your task or use @ to mention files or folders or URLs",
       "headerTitle": "Chat",
       "inputPlaceholder": "Type a message...",
       "thinking": "Thinking...",

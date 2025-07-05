@@ -159,6 +159,7 @@ export const zh = {
         }
     },
     "chat": {
+      "start":"输入您的任务或使用@引用文件、文件夹或URL",
       "headerTitle": "聊天",
       "inputPlaceholder": "输入消息...",
       "thinking": "思考中...",

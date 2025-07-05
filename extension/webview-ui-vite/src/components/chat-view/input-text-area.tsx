@@ -1,6 +1,6 @@
+import { useTranslation } from "@/hooks/useTranslation"
 import React, { forwardRef } from "react"
 import DynamicTextArea from "react-textarea-autosize"
-
 type InputTextAreaProps = {
 	value: string
 	disabled: boolean
@@ -17,6 +17,7 @@ type InputTextAreaProps = {
 export const CHAT_BOX_INPUT_ID = "chat-box-input" as const
 
 const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>((props, ref) => {
+	const {t} = useTranslation()
 	return (
 		<DynamicTextArea
 			tabIndex={0}
@@ -29,7 +30,7 @@ const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>((props
 			onFocus={props.onFocus}
 			onBlur={props.onBlur}
 			onPaste={props.onPaste}
-			placeholder={`Type your task or use @ to mention files or folders or URLs`}
+			placeholder={t("chat.start")}
 			maxRows={32}
 			className="!overflow-y-auto !min-h-[64px]"
 			autoFocus={true}

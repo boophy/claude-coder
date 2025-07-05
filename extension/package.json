@@ -1,5 +1,5 @@
 {
-	"name": "claude-dev-experimental",
+	"name": "claude-coder-chinese",
 	"displayName": "%extension.displayName%",
 	"description": "%extension.description%",
 	"version": "2.3.13",
@@ -11,10 +11,10 @@
 		"name": "Kodu AI"
 	},
 	"license": "AGPL-3.0-or-later",
-	"publisher": "kodu-ai",
+	"publisher": "boophy",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/kodu-ai/claude-coder"
+		"url": "https://github.com/boophy/claude-coder"
 	},
 	"categories": [
 		"AI",
@@ -70,24 +70,24 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "kodu-claude-coder-main-ActivityBar",
+					"id": "kodu-claude-coder-chinese-ActivityBar",
 					"title": "%viewsContainers.activitybar.title%",
 					"icon": "assets/kodu-logo.svg"
 				}
 			]
 		},
 		"views": {
-			"kodu-claude-coder-main-ActivityBar": [
+			"kodu-claude-coder-chinese-ActivityBar": [
 				{
 					"type": "webview",
-					"id": "kodu-claude-coder-main.SidebarProvider",
+					"id": "kodu-claude-coder-chinese.SidebarProvider",
 					"name": ""
 				}
 			]
 		},
 		"commands": [
 			{
-				"command": "kodu-claude-coder-main.setApiKey",
+				"command": "kodu-claude-coder-chinese.setApiKey",
 				"title": "%commands.setApiKey.title%"
 			},
 			{
@@ -95,27 +95,27 @@
 				"title": "%commands.openExternalLink.title%"
 			},
 			{
-				"command": "kodu-claude-coder-main.plusButtonTapped",
+				"command": "kodu-claude-coder-chinese.plusButtonTapped",
 				"title": "%commands.plusButtonTapped.title%",
 				"icon": "$(add)"
 			},
 			{
-				"command": "kodu-claude-coder-main.historyButtonTapped",
+				"command": "kodu-claude-coder-chinese.historyButtonTapped",
 				"title": "%commands.historyButtonTapped.title%",
 				"icon": "$(history)"
 			},
 			{
-				"command": "kodu-claude-coder-main.popoutButtonTapped",
+				"command": "kodu-claude-coder-chinese.popoutButtonTapped",
 				"title": "%commands.popoutButtonTapped.title%",
 				"icon": "$(link-external)"
 			},
 			{
-				"command": "kodu-claude-coder-main.settingsButtonTapped",
+				"command": "kodu-claude-coder-chinese.settingsButtonTapped",
 				"title": "%commands.settingsButtonTapped.title%",
 				"icon": "$(settings-gear)"
 			},
 			{
-				"command": "kodu-claude-coder-main.openInNewTab",
+				"command": "kodu-claude-coder-chinese.openInNewTab",
 				"title": "%commands.openInNewTab.title%",
 				"category": "Kodu"
 			}
@@ -123,24 +123,24 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "kodu-claude-coder-main.plusButtonTapped",
+					"command": "kodu-claude-coder-chinese.plusButtonTapped",
 					"group": "navigation@1",
-					"when": "view == kodu-claude-coder-main.SidebarProvider"
+					"when": "view == kodu-claude-coder-chinese.SidebarProvider"
 				},
 				{
-					"command": "kodu-claude-coder-main.historyButtonTapped",
+					"command": "kodu-claude-coder-chinese.historyButtonTapped",
 					"group": "navigation@2",
-					"when": "view == kodu-claude-coder-main.SidebarProvider"
+					"when": "view == kodu-claude-coder-chinese.SidebarProvider"
 				},
 				{
-					"command": "kodu-claude-coder-main.popoutButtonTapped",
+					"command": "kodu-claude-coder-chinese.popoutButtonTapped",
 					"group": "navigation@3",
-					"when": "view == kodu-claude-coder-main.SidebarProvider"
+					"when": "view == kodu-claude-coder-chinese.SidebarProvider"
 				},
 				{
-					"command": "kodu-claude-coder-main.settingsButtonTapped",
+					"command": "kodu-claude-coder-chinese.settingsButtonTapped",
 					"group": "navigation@4",
-					"when": "view == kodu-claude-coder-main.SidebarProvider"
+					"when": "view == kodu-claude-coder-chinese.SidebarProvider"
 				}
 			]
 		}

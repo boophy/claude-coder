@@ -261,7 +261,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand(`${extensionName}.settingsButtonTapped`, () => {
-			//const message = "kodu-claude-coder-main.settingsButtonTapped!"
+			//const message = "kodu-claude-coder-chinese.settingsButtonTapped!"
 			//vscode.window.showInformationMessage(message)
 			sidebarProvider
 				?.getWebviewManager()

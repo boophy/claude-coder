@@ -1,7 +1,7 @@
 {
-  "extension.displayName": "Kodu",
-  "extension.description": "您的 AI 编码助手。",
-  "viewsContainers.activitybar.title": "Kodu",
+  "extension.displayName": "Claude Coder 中文版",
+  "extension.description": "Claude Coder：你的 AI 编程助手，帮助新手和专业开发者进行编程、调试等各项任务。可在 AI 指导下创建/编辑文件并执行命令。无论你是零基础用户还是资深开发者，都能得心应手使用。尽享免费积分，为你的编码体验加速赋能。让 Claude Coder 将你的 IDE 转变为协作式 AI 工作空间。",
+  "viewsContainers.activitybar.title": "Claude Coder 中文版",
   "commands.setApiKey.title": "设置 API 密钥",
   "commands.openExternalLink.title": "打开外部链接",
   "commands.plusButtonTapped.title": "新建任务",

@@ -20,7 +20,7 @@ export const SettingsFooter = () => {
 								<TooltipTrigger asChild>
 									<Button variant="outline" size="icon" asChild>
 										<a
-											href="https://github.com/kodu-ai/claude-coder"
+											href="https://github.com/boophy/claude-coder"
 											target="_blank"
 											rel="noopener noreferrer">
 											<GitHubLogoIcon className="h-4 w-4" />
@@ -51,7 +51,7 @@ export const SettingsFooter = () => {
 						</TooltipProvider>
 					</div>
 					<Button variant="outline" size="sm" className="flex-grow max-w-fit" asChild>
-						<a href="https://github.com/kodu-ai/claude-coder" target="_blank" rel="noopener noreferrer">
+						<a href="https://github.com/boophy/claude-coder" target="_blank" rel="noopener noreferrer">
 							<StarIcon className="h-4 w-4 mr-2" />
 							Star us on GitHub
 						</a>
