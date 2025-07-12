@@ -2,7 +2,7 @@
 	"name": "claude-coder-chinese",
 	"displayName": "%extension.displayName%",
 	"description": "%extension.description%",
-	"version": "2.3.13",
+	"version": "2.3.14",
 	"icon": "assets/icon.png",
 	"engines": {
 		"vscode": "^1.96.0"

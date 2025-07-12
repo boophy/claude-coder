@@ -16,6 +16,7 @@ import ToolCards from "./tools"
 import { useAtom } from "jotai"
 import { currentPromptContentAtom, isCurrentPreviewAtom } from "./utils"
 import { editorVariable, TEMPLATE_PLACEHOLDERS, TemplateInfo } from "extension/shared/agent/prompt"
+import { useTranslation } from "@/hooks/useTranslation"
 
 // 1) REGISTER YOUR CUSTOM LANGUAGE (without defining a theme).
 //    This still enables syntax highlighting for your placeholders.
@@ -108,7 +109,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 	const [originalTemplateName, setOriginalTemplateName] = useState<string | null>(null)
 	const [originalTemplateContent, setOriginalTemplateContent] = useState<string>("")
 	const [preview, setPreview] = useAtom(isCurrentPreviewAtom)
-
+	const { t } = useTranslation()
 	const theme = useVSCodeTheme()
 
 	useEffect(() => {
@@ -302,13 +303,13 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 		}
 		const exists = templates.some((t) => t.name === loadedTemplateName)
 		if (!exists) {
-			return "Unsaved template"
+			return t("com.unsavedTmp")
 		}
 		// check for changes in name or content
 		const nameChanged = loadedTemplateName !== originalTemplateName
 		const contentChanged = value !== originalTemplateContent
 		if (nameChanged || contentChanged) {
-			return "Unsaved changes"
+			return t("com.unsavedChange")
 		}
 		return loadedTemplateName
 	}
@@ -319,7 +320,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 				<CardHeader>
 					<CardTitle className="flex items-center justify-between">
 						<div className="flex items-center gap-2">
-							<span>Prompt Template Editor</span>
+							<span>{t("com.editor")}</span>
 							{activeTemplate && (
 								<span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">
 									Active: {activeTemplate}
@@ -342,7 +343,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 								}}
 								className="flex items-center gap-2">
 								{preview ? <FileEdit className="w-4 h-4" /> : <Fullscreen className="w-4 h-4" />}
-								{preview ? "Show Editor" : "Show Preview"}
+								{preview ? t("com.showEditor") : t("com.showPreview")}
 							</Button>
 							<Button
 								variant="outline"
@@ -350,7 +351,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 								onClick={() => setShowLoadDialog(true)}
 								className="flex items-center gap-2">
 								<FolderOpen className="w-4 h-4" />
-								Load
+								{t("com.load")}
 							</Button>
 							<Button
 								variant="outline"
@@ -358,7 +359,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 								onClick={handleCopy}
 								className="flex items-center gap-2">
 								<Copy className="w-4 h-4" />
-								Copy
+								{t("com.copy")}
 							</Button>
 							<Button
 								variant="outline"
@@ -366,14 +367,14 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 								onClick={clearEditor}
 								className="flex items-center gap-2">
 								<RefreshCw className="w-4 h-4" />
-								Clear
+								{t("com.clear")}
 							</Button>
 							<Button
 								size="sm"
 								onClick={() => setShowSaveDialog(true)}
 								className="flex items-center gap-2">
 								<Save className="w-4 h-4" />
-								Save
+								{t("com.save")}
 							</Button>
 						</div>
 					</CardTitle>
@@ -411,25 +412,25 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 			<Dialog open={showSaveDialog} onOpenChange={setShowSaveDialog}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Save Template</DialogTitle>
+						<DialogTitle>{t("com.saveTmp")}</DialogTitle>
 					</DialogHeader>
 					<div className="space-y-4 py-4">
 						<div className="space-y-2">
-							<Label htmlFor="template-name">Template Name</Label>
+							<Label htmlFor="template-name">{t("com.tmpName")}</Label>
 							<Input
 								id="template-name"
 								value={templateName}
 								onChange={(e) => setTemplateName(e.target.value)}
-								placeholder="Enter template name..."
+								placeholder={t("com.enterName")}
 							/>
 						</div>
 					</div>
 					<DialogFooter>
 						<Button variant="outline" onClick={() => setShowSaveDialog(false)}>
-							Cancel
+							{t("com.cancel")}
 						</Button>
 						<Button onClick={handleSave} disabled={!templateName.trim()}>
-							Save Template
+							{t("com.saveTmp")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>
@@ -444,7 +445,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 					<div className="space-y-4 py-4">
 						<div className="space-y-2">
 							{templates.length === 0 ? (
-								<div className="text-center text-muted-foreground">No templates found</div>
+								<div className="text-center text-muted-foreground">{t("com.noTmp")}</div>
 							) : (
 								<div className="space-y-2">
 									{templates.map((template) => (
@@ -476,7 +477,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 														onClick={() => {
 															promptActions.deleteTemplate(template.name)
 														}}>
-														Delete
+														{t("com.delete")}
 													</Button>
 												)}
 											</div>
@@ -488,7 +489,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 					</div>
 					<DialogFooter>
 						<Button variant="outline" onClick={() => setShowLoadDialog(false)}>
-							Cancel
+							{t("com.cancel")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>
@@ -496,7 +497,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = () => {
 
 			{showCopiedAlert && (
 				<Alert variant="info" className="fixed bottom-4 right-4 w-auto">
-					<AlertDescription>Template copied to clipboard!</AlertDescription>
+					<AlertDescription>{t("com.copied")}</AlertDescription>
 				</Alert>
 			)}
 		</>

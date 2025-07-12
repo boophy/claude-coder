@@ -1,6 +1,28 @@
 
 export const en = {
   translation: {
+    "com":{
+      "input":"Input",
+      "output":"Output",
+      "cacheWrites":"Cache Writes",
+      "cacheReads":"Cache Reads",
+      "saveTmp":"Save Template",
+      "unsavedTmp":"Unsaved template",
+      "unsavedChange":"Unsaved changes",
+      "editor":"Prompt Template Editor",
+      "showPreview":"Show Preview",
+      "showEditor":"Show Editor",
+      "load":"Load",
+      "copy":"Copy",
+      "clear":"Clear",
+      "save":"Save",
+      "tmpName":"Template Name",
+      "enterName":"Enter template name...",
+      "cancel":"Cancel",
+      "noTmp":"No templates found",
+      "delete":"Delete",
+      "copied":"Template copied to clipboard!"
+    },
     "settings": {
       "title": "Settings",
       "description": "Manage your extension preferences",
@@ -26,6 +48,7 @@ export const en = {
         "haveApiKey": "Have Api Key click here"
       },
       "preferences": {
+        "recommended":"Recommended",
         "chooseDefaultModel": "Choose your default code-completion model",
         "mainArchitectureModel": "Main Architecture Model",
         "wantToUseCustomProvider": "Want to use a custom provider? ",
@@ -159,6 +182,8 @@ export const en = {
         }
     },
     "chat": {
+      "recent":"Recent Tasks",
+      "allHistory":"View all history",
       "start":"Type your task or use @ to mention files or folders or URLs",
       "headerTitle": "Chat",
       "inputPlaceholder": "Type a message...",
@@ -186,7 +211,6 @@ export const en = {
       "changeToChinese": "Switch to Chinese",
       "abort": "Stop"
     },
-    "greeting": "Hello, World!",
     "welcome": "Welcome, {{user}}!",
     "history": {
       "title": "History",

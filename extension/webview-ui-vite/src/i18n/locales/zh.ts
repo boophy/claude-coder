@@ -1,6 +1,28 @@
 
 export const zh = {
   translation: {
+    "com":{
+      "input":"输入",
+      "output":"输出",
+      "cacheWrites":"写缓存",
+      "cacheReads":"读缓存",
+      "saveTmp":"保存模板",
+      "unsavedTmp":"未保存模板",
+      "unsavedChange":"未保存修改",
+      "editor":"提示词模板编辑器",
+      "showPreview":"显示预览",
+      "showEditor":"显示编辑器",
+      "load":"加载",
+      "copy":"复制",
+      "clear":"清除",
+      "save":"保存",
+      "tmpName":"模板名",
+      "enterName":"输入模板名...",
+      "cancel":"取消",
+      "noTmp":"未发现模板",
+      "delete":"删除",
+      "copied":"模板已复制到剪贴板!"
+    },
     "settings": {
       "title": "设置",
       "description": "管理您的扩展首选项",
@@ -26,6 +48,7 @@ export const zh = {
         "haveApiKey": "有 Api Key 点击这里"
       },
       "preferences": {
+        "recommended":"推荐",
         "chooseDefaultModel": "选择您的默认代码补全模型",
         "mainArchitectureModel": "主架构模型",
         "wantToUseCustomProvider": "想要使用自定义提供商？",
@@ -159,6 +182,8 @@ export const zh = {
         }
     },
     "chat": {
+      "recent":"最近的任务",
+      "allHistory":"查看历史",
       "start":"输入您的任务或使用@引用文件、文件夹或URL",
       "headerTitle": "聊天",
       "inputPlaceholder": "输入消息...",
@@ -186,7 +211,6 @@ export const zh = {
       "changeToChinese": "切换到中文",
       "abort": "停止"
     },
-    "greeting": "你好，世界！",
     "welcome": "欢迎，{{user}}！",
     "history": {
       "title": "历史记录",

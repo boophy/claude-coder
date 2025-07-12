@@ -3,6 +3,7 @@ import React from "react"
 import { useExtensionState } from "../../context/extension-state-context"
 import { vscode } from "../../utils/vscode"
 import TaskCard from "./task-card"
+import { useTranslation } from "@/hooks/useTranslation"
 
 interface HistoryPreviewProps {
 	showHistoryView: () => void
@@ -10,7 +11,7 @@ interface HistoryPreviewProps {
 
 const HistoryPreview: React.FC<HistoryPreviewProps> = ({ showHistoryView }) => {
 	const { taskHistory } = useExtensionState()
-
+	const { t } = useTranslation()
 	const handleHistorySelect = (id: string) => {
 		vscode.postMessage({ type: "showTaskWithId", text: id })
 	}
@@ -19,7 +20,7 @@ const HistoryPreview: React.FC<HistoryPreviewProps> = ({ showHistoryView }) => {
 		<section className="border-b-0">
 			<h3 className="flex-line uppercase text-alt">
 				<span className="codicon codicon-history text-alt" />
-				Recent Tasks
+				{t("chat.recent")}
 			</h3>
 
 			{taskHistory
@@ -41,7 +42,7 @@ const HistoryPreview: React.FC<HistoryPreviewProps> = ({ showHistoryView }) => {
 					/>
 				))}
 			<VSCodeButton appearance="icon" onClick={showHistoryView}>
-				<div className="text-light">View all history</div>
+				<div className="text-light">{t("chat.allHistory")}</div>
 			</VSCodeButton>
 		</section>
 	)

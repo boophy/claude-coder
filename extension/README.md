@@ -1,80 +1,80 @@
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items/kodu-ai.claude-dev-experimental" target="_blank"><strong>Download Extension</strong></a> | <a href="https://discord.gg/Fn97SD34qk" target="_blank"><strong>Join the Discord</strong></a>
+  <a href="https://marketplace.visualstudio.com/items/boophy.claude-coder-chinese" target="_blank"><strong>下载扩展</strong></a> | <a href="https://discord.gg/Fn97SD34qk" target="_blank"><strong>加入 Discord 社区</strong></a>
 </p>
 
-# 👋 Hey there !
+# 👋 嗨，你好！
 
 <img src="https://raw.githubusercontent.com/kodu-ai/claude-coder/refs/heads/main/extension/assets/kodu.png" width="100" align="right" alt="Claude Coder Logo" />
 
-Welcome to Claude Coder. Whether you're a developer looking to supercharge your workflow, or someone with a brilliant idea but limited coding experience, you're in the right place. I created this tool to bridge the gap between imagination and implementation, making coding more accessible and efficient for everyone.
+欢迎使用 Claude Coder。无论你是希望提升工作效率的开发者，还是有一个绝妙想法但编程经验有限的人，这里都是你的理想之地。我创建这个工具是为了弥合想象与实现之间的差距，让编码对每个人来说都更加便捷高效。
 
-## 🚀 What's Claude Coder?
+## 🚀 什么是 Claude Coder？
 
-Think of Claude Coder as your 24/7 AI-powered Software Developer. It's a VS Code extension that adapts to your skill level, helping you bring ideas to life faster than ever before.
-All you need to is tell Claude what's your task and Claude will take care of it for you, need a website? dashboard? server? design? Claude got it all covered for you.
+将 Claude Coder 视为你的 24/7 AI 驱动的软件开发助手。它是一个 VS Code 扩展，能根据你的技能水平进行适配，帮助你以前所未有的速度将想法变为现实。  
+你只需告诉 Claude 你的任务，它就会为你处理一切——需要一个网站？仪表盘？服务器？设计？Claude 全都能搞定。
 
-### 🌟 Here's what Claude Coder can do for you:
+### 🌟 Claude Coder 能为你做什么：
 
--   💡 **Idea to Implementation**: Transform concepts into code, whether you're starting from scratch or building complex systems
--   🎨 **Design to Reality**: Convert mockups and wireframes into functional applications
--   🐞 **Intuitive Debugging**: Identify and fix issues quickly, saving you hours of troubleshooting
--   🚗 **Accelerate Development**: Automate repetitive tasks and generate boilerplate code
--   📚 **Learn and Grow**: Improve your coding skills with explanations and best practices
--   🔍 **Search The Web**: Take inspiration from existing content, or ask claude to do it's own research to adapt his knowledge for your needings.
--   🔍 **Deploy and Publish**: Claude can help you publish your project online, using existings tools without you breaking your head how to get your awesome project online.
+-   💡 **从创意到实现**：将概念转化为代码，无论是从零开始还是构建复杂系统
+-   🎨 **从设计到现实**：将线框图和原型设计转换成功能齐全的应用程序
+-   🐞 **直观调试**：快速识别并修复问题，节省数小时排错时间
+-   🚗 **加速开发流程**：自动化重复性任务，生成样板代码
+-   📚 **学习与成长**：通过解释和最佳实践提升编码技能
+-   🔍 **网页搜索**：从现有内容中获取灵感，或让 Claude 自主研究以适应你的需求
+-   🌐 **部署与发布**：Claude 可以帮助你使用现有工具轻松地将项目上线，无需烦恼复杂的发布流程
 
-## 🛠 Getting Started
+## 🛠 快速入门
 
-1. **Install VS Code**: If you haven't already, [download it here](https://code.visualstudio.com/).
-2. **Add Claude Coder**:
-    - Open VS Code
-    - Click the puzzle piece icon on the left sidebar
-    - Search for ["Claude Coder"](https://www.kodu.ai/l/ext)
-    - Click "Install"
-3. **Start Coding**:
-    - Open a project or create a new file
-    - Describe what you want to build or get help with
-    - Let Claude Coder assist you in bringing your ideas to life!
+1. **安装 VS Code**：如果尚未安装，请[点击此处下载](https://code.visualstudio.com/)。
+2. **添加 Claude Coder**：
+    - 打开 VS Code
+    - 点击左侧边栏的拼图图标
+    - 在扩展商店中搜索 ["Claude Coder Chinese"](https://github.com/boophy/claude-coder)
+    - 点击“安装”
+3. **开始编码**：
+    - 打开一个项目或新建文件
+    - 描述你想构建的内容或寻求帮助
+    - 让 Claude Coder 协助你将想法变为现实！
 
-## 💖 Why I Made This
+## 💖 我为何开发此工具
 
-As someone who's been in tech for years, I've seen the challenges faced by both newcomers and experienced developers. I wanted to create a tool that could level the playing field, making development more accessible to beginners while also boosting the productivity of seasoned coders. Claude Coder is my way of empowering everyone to build amazing things, regardless of their coding background.
+作为一名在技术领域深耕多年的开发者，我深知新手和资深程序员都会遇到各种挑战。我想创造一个能够拉平竞争环境的工具，让初学者更容易上手开发，同时提升有经验开发者的生产力。这就是我打造 Claude Coder 的初衷——赋能每个人创造出令人惊叹的作品，不论他们的编程背景如何。
 
-## 🤝 Join Our Community
+## 🤝 加入我们的社区
 
-Whether you're stuck on a problem, have a cool idea to share, or just want to connect with fellow creators, join our [Discord](https://discord.gg/Fn97SD34qk)! It's a vibrant community of developers and innovators at all skill levels.
+如果你遇到了难题、想要分享一个好点子，或者只是想与其他创作者交流互动，欢迎加入我们的 [Discord 社区](https://discord.gg/Fn97SD34qk)！这是一个汇聚了各技能层次开发者的活跃社区。
 
-## 🙏 Special Thanks
+## 🙏 特别致谢
 
-A big shoutout to the amazing projects and people that inspired Claude Coder:
+感谢以下启发了 Claude Coder 的杰出项目和人物：
 
--   **Aider**: For innovative ideas on enhancing user experience
--   **Claude Dev**: Especially Saoud, for laying an incredible foundation
+-   **Aider**：为用户体验改进提供了创新思路
+-   **Claude Dev**：特别是 Saoud，为项目奠定了坚实的基础
 
-## 🚀 Ready to Elevate Your Coding?
+## 🚀 准备好升级你的编码体验了吗？
 
-[Get Claude Coder Now](https://www.kodu.ai/l/ext) and start transforming your ideas into reality!
+[立即获取 Claude Coder](https://github.com/boophy/claude-coder)，开启从创意到现实的旅程！
 
-Whether you're crafting your first "Hello, World!" or architecting complex systems, Claude Coder is here to help you push the boundaries of what's possible. Can't wait to see what you create! 🌟
+无论你是写出人生第一个 "Hello, World!"，还是正在架构复杂的系统，Claude Coder 都会陪伴你突破可能性的边界。期待看到你创造出的精彩作品！🌟
 
 ---
 
 <details>
-<summary>🔧 For the tech-savvy: How to Contribute</summary>
+<summary>🔧 技术向：如何贡献代码</summary>
 
-If you're a developer and want to help make Claude Coder even better, here's how:
+如果你是一名开发者，并希望帮助我们进一步完善 Claude Coder，可以按照以下步骤操作：
 
-1. Clone the repo: `git clone https://github.com/kodu-ai/claude-coder.git`
-2. Open in VS Code: `code claude-coder`
-3. Navigate to extension folder: `cd extension`
-4. Install dependencies: `pnpm run install:clean`
-5. Run with `F5`
+1. 克隆仓库：`git clone https://github.com/boophy/claude-coder.git`
+2. 使用 VS Code 打开：`code claude-coder`
+3. 进入扩展目录：`cd extension`
+4. 安装依赖项：`pnpm run install:clean`
+5. 启动调试模式：按 `F5`
 
-Pro tips:
+小贴士：
 
--   Webview hot-reloads, but might need an occasional extension host reload
--   Extension host changes need a full reload (Cmd/Ctrl + R)
+-   Webview 支持热重载，但偶尔可能需要重启扩展宿主
+-   若修改了扩展宿主代码，需完全重新加载（按 Cmd/Ctrl + R）
 
-Make your changes, create a pull request, and let's make magic together!
+完成修改后提交 Pull Request，让我们一起创造奇迹吧！
 
 </details>

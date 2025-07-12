@@ -118,7 +118,7 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 				</Badge>
 			)}
 
-			{model.isRecommended && <Badge variant="default">Recommended</Badge>}
+			{model.isRecommended && <Badge variant="default">{t("settings.preferences.recommended")}</Badge>}
 		</div>
 	)
 
@@ -210,16 +210,16 @@ export const ModelSelector: FC<ModelSelectorProps> = ({
 
 												{/* CPM, context window, output limit inline */}
 												<span className="text-[11px] text-muted-foreground">
-													Input: ${model.inputPrice?.toFixed(2)} | Output: $
+													{t("com.input")}: ${model.inputPrice?.toFixed(2)} | Output: $
 													{model.outputPrice?.toFixed(2)} |{" "}
 													{model.cacheWritesPrice &&
 														model.cacheReadsPrice &&
-														"Cache Writes: $" +
+														t("com.cacheWrites")+": $" +
 															model.cacheWritesPrice?.toFixed(2) +
-															" | Cache Reads: $" +
+															" | "+t("com.cacheReads")+": $" +
 															model.cacheReadsPrice?.toFixed(2) +
 															" | "}
-													Context: {model.contextWindow} | Output: {model.maxTokens}
+													{t("com.input")}: {model.contextWindow} | {t("com.output")}: {model.maxTokens}
 												</span>
 												<span className="text-[11px] text-muted-foreground">
 													{t("settings.preferences.price")}
