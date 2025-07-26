@@ -2,7 +2,7 @@
 	"name": "claude-coder-chinese",
 	"displayName": "%extension.displayName%",
 	"description": "%extension.description%",
-	"version": "2.3.14",
+	"version": "2.3.15",
 	"icon": "assets/icon.png",
 	"engines": {
 		"vscode": "^1.96.0"
@@ -14,7 +14,7 @@
 	"publisher": "boophy",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/boophy/claude-coder"
+		"url": "https://github.com/boophy/claude-coder/tree/main/extension"
 	},
 	"categories": [
 		"AI",
